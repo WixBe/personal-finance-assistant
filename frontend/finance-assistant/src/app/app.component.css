@@ -10,9 +10,9 @@
 
 .navbar-container {
     position: fixed;
-    z-index: 1;
+    z-index: 5;
     top: 0;
-    padding: 10px;
+    padding: 0.625rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
