@@ -30,10 +30,10 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getUserById(id));
     }
 
-    @GetMapping("/username")
-    public ResponseEntity<Optional<User>> getUserByUsername(@RequestParam("USERNAME") String name) {
+    @GetMapping("/email")
+    public ResponseEntity<Optional<User>> getUserByUsername(@RequestParam("EMAIL") String email) {
 
-        return ResponseEntity.ok().body(userService.getUserByName(name));
+        return ResponseEntity.ok().body(userService.getUserByEmail(email));
     }
 
     @GetMapping("/accountNumber")

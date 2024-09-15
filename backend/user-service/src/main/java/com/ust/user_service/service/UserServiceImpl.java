@@ -1,5 +1,6 @@
 package com.ust.user_service.service;
 
+import com.ust.user_service.entity.Role;
 import com.ust.user_service.entity.User;
 import com.ust.user_service.exception.UserNotFoundException;
 import com.ust.user_service.repository.UserRepository;
@@ -31,12 +32,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getUserByName(String username) {
-        Optional<User> user = userRepository.findByUsername(username);
+    public Optional<User> getUserByRoleAndEmail(Role role, String email) {
+        Optional<User> user = userRepository.findByRoleAndEmail(role, email);
         if (user.isPresent()) {
             return user;
         } else {
-            throw new UserNotFoundException("User with name: "+username+" not found");
+            throw new UserNotFoundException("User with email: "+email+" and role: "+role+" not found");
+        }
+    }
+
+    @Override
+    public Optional<User> getUserByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isPresent()) {
+            return user;
+        } else {
+            throw new UserNotFoundException("User with email: "+email+" not found");
         }
     }
 

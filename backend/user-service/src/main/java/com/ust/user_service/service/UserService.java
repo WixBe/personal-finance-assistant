@@ -1,5 +1,6 @@
 package com.ust.user_service.service;
 
+import com.ust.user_service.entity.Role;
 import com.ust.user_service.entity.User;
 
 import java.util.List;
@@ -11,7 +12,9 @@ public interface UserService {
 
     Optional<User> getUserById(long id);
 
-    Optional<User> getUserByName(String username);
+    Optional<User> getUserByRoleAndEmail(Role role, String email);
+
+    Optional<User> getUserByEmail(String username);
 
     Optional<User> getUserByAccountNumber(String accountNumber);
 
