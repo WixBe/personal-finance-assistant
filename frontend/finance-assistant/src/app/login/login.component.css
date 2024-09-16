@@ -1,0 +1,22 @@
+mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  mat-dialog-actions {
+    margin-top: 15px;
+  }
+  
+.login-container {
+    padding: 1rem;
+    width: 25vw;
+    height: fit-content;
+}
+
+.form-group {
+    padding: 0.2rem;
+}
+
+input {
+    margin-top: 0.2rem;
+}
