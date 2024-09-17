@@ -47,6 +47,7 @@ export class HomeComponent implements OnInit{
         scale: 1.00,
         scaleMobile: 1.00,
         color: 0x3f60ff,
+        color2: 0x3f60ff,
         size: 3,
         backgroundColor: 0xffffff
       });

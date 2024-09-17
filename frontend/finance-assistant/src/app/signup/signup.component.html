@@ -1,26 +1,82 @@
 <div class="signup-container" w-100>
     <h2>Sign Up</h2>
-    <form action="">
+    <form [formGroup]="signupForm">
         <div class="form-group" w-30>
             <label for="firstName">First Name</label>
-            <input type="text" class="form-control" id="firstName" placeholder="Enter first name" w-30>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="firstName" 
+                placeholder="Enter first name" 
+                formControlName="firstName"
+                [ngClass]="f.firstName.invalid && (f.firstName.dirty || f.firstName.touched) ? 'is-invalid': ''"
+                w-30
+            >
+            @if (f.firstName.invalid && (f.firstName.dirty || f.firstName.touched)) {
+                <small class="alert alert-danger">First name must be at least 2 characters long</small>
+            }
         </div>
         <div class="form-group">
             <label for="lastName">Last Name</label>
-            <input type="text" class="form-control" id="fullName" placeholder="Enter last name">
+            <input 
+                type="text" 
+                class="form-control" 
+                id="fullName" 
+                placeholder="Enter last name"
+                formControlName="lastName"
+                [ngClass]="f.lastName.invalid && (f.lastName.dirty || f.lastName.touched) ? 'is-invalid': ''"
+                w-30
+            >
+            @if (f.lastName.invalid && (f.lastName.dirty || f.lastName.touched)) {
+                <small class="alert alert-danger">Last name must not be empty.</small>
+            }
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <input 
+                type="email" 
+                class="form-control" 
+                id="email" 
+                aria-describedby="emailHelp" 
+                placeholder="Enter email"
+                formControlName="email"
+                [ngClass]="f.email.invalid && (f.email.dirty || f.email.touched) ? 'is-invalid': ''"
+                w-30
+            >
+            @if (f.email.invalid && (f.email.dirty || f.email.touched)) {
+                <small class="alert alert-danger">Invalid email</small>
+            }
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Enter password">
+            <input 
+                type="password" 
+                class="form-control" 
+                id="password" 
+                placeholder="Enter password"
+                formControlName="password"
+                [ngClass]="f.password.invalid && (f.password.dirty || f.password.touched) ? 'is-invalid': ''"
+                w-30
+            >
+            @if (f.password.invalid && (f.password.dirty || f.password.touched)) {
+                <small class="alert alert-danger">Password must be at least 8 charaters long</small>
+            }
         </div>
         <div class="form-group">
             <label for="confirm-password">Confirm Password</label>
-            <input type="password" class="form-control" id="confirm-password" placeholder="Confirm password">
+            <input 
+                type="password" 
+                class="form-control" 
+                id="confirm-password" 
+                placeholder="Confirm password"
+                formControlName="confirmPassword"
+                [ngClass]="signupForm.errors?.['passwordsDontMatch'] && (f.confirmPassword.dirty || f.confirmPassword.touched) ? 'is-invalid': ''"
+                w-30
+            >
+            @if (signupForm.errors?.['passwordsDontMatch'] && (f.confirmPassword.dirty || f.confirmPassword.touched)) {
+                <small class="alert alert-danger">Passwords do not match</small>
+            }
         </div>
         <div class="btn-container">
             <button type="submit" class="btn btn-primary">Register</button>
