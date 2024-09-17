@@ -20,3 +20,20 @@ mat-form-field {
 input {
     margin-top: 0.2rem;
 }
+
+.btn-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+.login-text {
+  color: #0B5ED7;
+}
+
+.login-text:hover {
+  color: blueviolet;
+}
