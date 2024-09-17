@@ -10,9 +10,4 @@ import { RouterLink } from '@angular/router';
   imports: [RouterLink]
 })
 export class LoginComponent {
-  constructor(public dialogRef: MatDialogRef<LoginComponent>) {}
-
-  close(): void {
-    this.dialogRef.close();  // Close the dialog
-  }
 }

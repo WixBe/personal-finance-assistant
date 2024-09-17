@@ -37,3 +37,11 @@ input {
 .login-text:hover {
   color: blueviolet;
 }
+
+span {
+  margin-top: 1.2rem;
+}
+
+button {
+  align-self: flex-end;
+}

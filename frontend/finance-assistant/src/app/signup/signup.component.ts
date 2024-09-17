@@ -10,12 +10,5 @@ import { LoginComponent } from '../login/login.component';
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
 })
-export class SignupComponent {
-
-  constructor( private loginRef : MatDialog){}
-
-  openLoginDialog() {
-    this.loginRef.open(LoginComponent);
-  }
-  
+export class SignupComponent {  
 }
