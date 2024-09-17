@@ -1,14 +1,35 @@
 <div class="login-container" w-100>
     <h2>Login</h2>
-    <form action="">
+    <form [formGroup]="loginForm">
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <input 
+                type="email" 
+                class="form-control" 
+                id="email" 
+                aria-describedby="emailHelp" 
+                placeholder="Enter email"
+                formControlName="email"
+                [ngClass]="f.email.invalid && (f.email.dirty || f.email.touched) ? 'is-invalid': ''"
+            >
+            @if (f.email.invalid && (f.email.dirty || f.email.touched)) {
+                <small class="alert alert-danger">Invalid email</small>
+            }
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Enter password">
+            <input 
+                type="password" 
+                class="form-control" 
+                id="password" 
+                placeholder="Enter password"
+                formControlName="password"
+                [ngClass]="f.password.invalid && (f.password.dirty || f.password.touched) ? 'is-invalid': ''"
+            >
+            @if (f.password.invalid && (f.password.dirty || f.password.touched)) {
+                <small class="alert alert-danger">Password must be at least 8 charaters long</small>
+            }
         </div>
         <div class="form-group">
             <div class="form-check">
@@ -18,7 +39,7 @@
         </div>
         <div class="btn-container">
             <button type="submit" class="btn btn-primary">Login</button>
-            <span>Don't have an account? <a routerLink="home/signup" class="login-text">Register</a></span>
+            <span>Don't have an account? <a routerLink="signup" class="login-text">Register</a></span>
         </div>
     </form>
 </div>
