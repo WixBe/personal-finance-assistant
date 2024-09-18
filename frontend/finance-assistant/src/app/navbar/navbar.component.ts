@@ -1,20 +1,29 @@
-import { Component } from '@angular/core';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
+import { NgIf } from '@angular/common';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, MatDialogModule],
+  imports: [RouterLink, NgIf],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit{
 
-  constructor( private loginRef : MatDialog){}
+  isLoggedIn: boolean = false;
 
-  openLoginDialog() {
-    this.loginRef.open(LoginComponent);
+  constructor( private authService: AuthService ) {}
+
+  ngOnInit(): void {
+    this.authService.authStatus.subscribe(status => {
+      this.isLoggedIn = status
+    });
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

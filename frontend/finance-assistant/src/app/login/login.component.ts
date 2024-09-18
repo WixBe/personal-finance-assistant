@@ -24,4 +24,10 @@ export class LoginComponent {
   resetForm() {
     this.loginForm.reset;
   }
+
+  onSubmit() {
+    console.log('Login form submitted');
+    console.log('Email: ', this.f.email.value);
+    console.log('Password: ', this.f.password.value);
+  }
 }

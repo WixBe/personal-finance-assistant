@@ -1,6 +1,6 @@
 <div class="signup-container" w-100>
     <h2>Sign Up</h2>
-    <form [formGroup]="signupForm">
+    <form [formGroup]="signupForm" (submit)="signup()">
         <div class="form-group" w-30>
             <label for="firstName">First Name</label>
             <input 
@@ -47,6 +47,20 @@
                 <small class="alert alert-danger">Invalid email</small>
             }
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input 
+                type="text"
+                class="form-control" 
+                id="phone" 
+                placeholder="Enter phone number"
+                formControlName="phone"
+                [ngClass]="f.phone.invalid && (f.phone.dirty || f.phone.touched) ? 'is-invalid': ''"
+            >
+            @if (f.phone.invalid && (f.phone.dirty || f.phone.touched)) {
+                <small class="alert alert-danger">Invalid phone number</small>
+            }
         </div>
         <div class="form-group">
             <label for="password">Password</label>

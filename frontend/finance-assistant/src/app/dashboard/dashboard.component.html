@@ -1,0 +1,44 @@
+<div class="dashboard-container" w-100>
+    <h1>Welcome, {{ user.name }}</h1>
+    
+    <!-- Budget and Savings Section -->
+    <div class="budget-section">
+      <h2>Your Budget Overview</h2>
+      <p>Total Budget: ₹{{ user.totalBudget }}</p>
+      <p>Total Savings: ₹{{ user.savings }}</p>
+    </div>
+  
+    <!-- Financial Goals Section -->
+    <div class="goals-section">
+      <h2>Your Financial Goals</h2>
+      <ul>
+        <li *ngFor="let goal of user.goals">
+          <strong>{{ goal.name }}</strong> - Target: ₹{{ goal.target }}, Current: ₹{{ goal.current }}
+        </li>
+      </ul>
+    </div>
+  
+    <!-- Recent Transactions Section -->
+    <div class="transactions-section">
+      <h2>Recent Transactions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let transaction of user.transactions">
+            <td>{{ transaction.date }}</td>
+            <td>{{ transaction.description }}</td>
+            <td [ngClass]="{ 'negative': transaction.amount < 0, 'positive': transaction.amount > 0 }">
+              ₹{{ transaction.amount }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
