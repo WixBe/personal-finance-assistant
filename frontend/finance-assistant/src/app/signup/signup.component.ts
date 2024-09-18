@@ -49,8 +49,7 @@ export class SignupComponent {
       password: this.f.password.value
     };
 
-    console.log('success');
-
+    
     if (user.email && user.password) {
       this.userService.registerUser(user).subscribe(success => {
         if (success) {
@@ -64,6 +63,7 @@ export class SignupComponent {
           this.signupSuccess = false;
         }
       });
+      console.log('success');
     }
   }
 }

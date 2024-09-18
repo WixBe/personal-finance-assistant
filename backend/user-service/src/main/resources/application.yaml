@@ -1,21 +1,43 @@
+#spring:
+#  application:
+#    name: user-service
+#  datasource:
+#    platform: h2
+#    url: jdbc:h2:mem:test
+#    username: sa
+#    password: root
+#    driverClassName: org.h2.Driver
+#  jpa:
+#    database-platform: org.hibernate.dialect.H2Dialect
+#    hibernate:
+#      ddl-auto: create-drop
+#    show-sql: true
+#  h2:
+#    console:
+#      enabled: true
+#      path: /db
+#
+#logging:
+#  level:
+#    web: WARN
+#    root: INFO
+#    com.ust.user_service: DEBUG
+#  pattern: "%msg%n"
+
 spring:
   application:
     name: user-service
   datasource:
-    platform: h2
-    url: jdbc:h2:mem:test
-    username: sa
+    platform: mysql
+    url: jdbc:mysql://localhost:3306/finMaster
+    username: root
     password: root
-    driverClassName: org.h2.Driver
+    driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: create-drop
     show-sql: true
-  h2:
-    console:
-      enabled: true
-      path: /db
 
 logging:
   level:

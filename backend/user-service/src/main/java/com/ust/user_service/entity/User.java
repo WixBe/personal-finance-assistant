@@ -1,11 +1,13 @@
 package com.ust.user_service.entity;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.hateoas.server.core.Relation;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,6 +22,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
+@Relation(collectionRelation = "users")
+@JsonRootName(value = "users")
 public class User implements UserDetails {
 
     @Id

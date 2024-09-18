@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ust</groupId>
-	<artifactId>banking</artifactId>
+	<artifactId>banking-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>banking</name>
 	<description>Mock banking service</description>
