@@ -1,7 +1,9 @@
 package com.ust.user_service.controller;
 
+import com.ust.user_service.dto.LoginDto;
 import com.ust.user_service.dto.UserDto;
 import com.ust.user_service.entity.User;
+import com.ust.user_service.service.AuthenticationService;
 import com.ust.user_service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
@@ -19,6 +21,8 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+
 
     @GetMapping("/")
     public ResponseEntity<List<User>> getAllUsers() {
@@ -44,14 +48,6 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getUserByAccountNumber(accountNumber));
     }
 
-    @PostMapping("/")
-    public ResponseEntity<UserDto> registerUser(@RequestBody UserDto dto) {
-
-        User user = dto.fromDto(dto);
-        user = userService.addUser(user);
-        dto = dto.toDto(user);
-        return ResponseEntity.ok().body(dto);
-    }
 
     @PutMapping("/{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable long id, @RequestBody UserDto dto) {
