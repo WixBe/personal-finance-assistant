@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LoginComponent } from '../login/login.component';
 import { NgIf } from '@angular/common';
 import { AuthService } from '../auth.service';
 
@@ -21,9 +20,11 @@ export class NavbarComponent implements OnInit{
     this.authService.authStatus.subscribe(status => {
       this.isLoggedIn = status
     });
+    // (window as any).navbarComponent = this;
   }
 
   logout() {
     this.authService.logout();
   }
+
 }

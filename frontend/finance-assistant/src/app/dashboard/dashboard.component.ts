@@ -1,6 +1,7 @@
 // dashboard.component.ts
 import { NgClass, NgFor } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, Injector, OnInit } from '@angular/core';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,6 +12,8 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class DashboardComponent implements OnInit {
+
+  constructor(private componentFactoryResolver: ComponentFactoryResolver, private injector: Injector) {}
 
   // Mock Data
   user = {
@@ -28,9 +31,12 @@ export class DashboardComponent implements OnInit {
     ]
   };
 
-  constructor() { }
-
   ngOnInit(): void {
+
+    const navbarComponentRef = this.componentFactoryResolver.resolveComponentFactory(NavbarComponent)
+    const navbarComponentInstance = navbarComponentRef.create(this.injector);
+
+    navbarComponentInstance.instance.ngOnInit();
   }
 
 }

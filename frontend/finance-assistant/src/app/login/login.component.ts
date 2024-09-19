@@ -3,7 +3,8 @@ import { HttpClient, HttpClientModule, HttpEvent, HttpHandler, HttpRequest } fro
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit{
   submitted = false;
   invalidLogin = false;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private authService: AuthService) { }
   
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
