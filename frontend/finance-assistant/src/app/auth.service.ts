@@ -9,7 +9,7 @@ import { BehaviorSubject, Observable, of } from "rxjs";
 export class AuthService {
 
 
-    private loggedIn = new BehaviorSubject<boolean>(this.isLoggedIn());
+    loggedIn = new BehaviorSubject<boolean>(this.isLoggedIn());
 
     authStatus = this.loggedIn.asObservable();
 
