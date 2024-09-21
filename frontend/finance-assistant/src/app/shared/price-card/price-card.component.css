@@ -26,7 +26,10 @@
   .price-body h2 {
     font-size: 2.5rem;
     margin-bottom: 20px;
-    color: #007bff;
+
+    background: linear-gradient(to right, #408cff, blueviolet);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   
   .price-body p {
@@ -34,9 +37,36 @@
     color: #666;
   }
   
-  button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 5px;
+  .btn {
+    width: fit-content;
+    gap: 0.4rem;
+    border: none;
+    font-weight: semi-blod;
+    cursor: pointer;
+    text-shadow: 2px 2px 3px rgb(136 0 136 / 50%);
+    background: linear-gradient(
+        15deg,
+        #408cff, blueviolet, #bc3fcc, blueviolet, #408cff
+      )
+      no-repeat;
+    background-size: 300%;
+    background-position: right center;
+    transition: background 0.3s ease;
+    color: #fff;
+  }
+  
+  .btn:hover {
+    background-size: 320%;
+    background-position: left center;
+  }
+  
+  .btn:hover svg {
+    fill: #fff;
+  }
+  
+  .btn svg {
+    width: 23px;
+    fill: #f09f33;
+    transition: 0.3s ease;
   }
   

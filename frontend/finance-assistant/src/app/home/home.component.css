@@ -25,6 +25,42 @@
   margin: 1.5rem;
 }
 
+/* From Uiverse.io by satyamchaudharydev */ 
+/* inspired from this svgbackgrounds.com/ */
+.btn {
+  width: fit-content;
+  gap: 0.4rem;
+  border: none;
+  font-weight: semi-blod;
+  cursor: pointer;
+  text-shadow: 2px 2px 3px rgb(136 0 136 / 50%);
+  background: linear-gradient(
+      15deg,
+      #408cff, blueviolet, #bc3fcc, blueviolet, #408cff
+    )
+    no-repeat;
+  background-size: 300%;
+  background-position: right center;
+  transition: background 0.3s ease;
+  color: #fff;
+}
+
+.btn:hover {
+  background-size: 320%;
+  background-position: left center;
+}
+
+.btn:hover svg {
+  fill: #fff;
+}
+
+.btn svg {
+  width: 23px;
+  fill: #f09f33;
+  transition: 0.3s ease;
+}
+
+
 /* Features Section */
 .features-section {
   background-color: #fff;
@@ -39,12 +75,23 @@
 
 .feature-icon {
   font-size: 3rem;
-  color: #007bff;
+  background: linear-gradient(
+      15deg,
+      #408cff, blueviolet, #bc3fcc, blueviolet, #408cff
+    )
+    no-repeat;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 300%;
+  background-position: right center;
+  transition: background 0.3s ease;
+  color: #fff;
   margin-bottom: 1.5rem;
 }
 
 .feature-icon:hover {
-  color: #0056b3;
+  background-size: 320%;
+  background-position: left center;
 }
 
 .features-section p {

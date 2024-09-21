@@ -30,8 +30,23 @@
   
   .feature-icon {
     font-size: 3rem;
-    color: #007bff;
-    margin-bottom: 15px;
+    background: linear-gradient(
+        15deg,
+        #408cff, blueviolet, #bc3fcc, blueviolet, #408cff
+      )
+      no-repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 300%;
+    background-position: right center;
+    transition: background 0.3s ease;
+    color: #fff;
+    margin-bottom: 1.5rem;
+  }
+  
+  .feature-icon:hover {
+    background-size: 320%;
+    background-position: left center;
   }
   
   .feature-item h3 {

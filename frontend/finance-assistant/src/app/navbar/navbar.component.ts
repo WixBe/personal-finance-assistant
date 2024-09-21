@@ -28,4 +28,14 @@ export class NavbarComponent implements OnInit{
     this.authService.logout();
   }
 
+  setActive(event: Event) {
+    // Remove 'active' class from all nav-links
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => link.classList.remove('active'));
+
+    // Add 'active' class to the clicked nav-link
+    const target = event.target as HTMLElement;
+    target.classList.add('active');
+  }
+
 }

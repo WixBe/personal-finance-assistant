@@ -1,14 +1,19 @@
-.navbar-container {
-  margin: 0 auto;
-  width: 100vw;
-  padding: 0 1rem;
-}
 .navbar-brand {
   font-weight: bold;
   font-size: 1.5rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .nav-link {
-  color: #333;
+  color: white;
+}
+
+.nav-link.active {
+  color: white;
+  text-decoration: underline;
 }
 
 .d-flex {
@@ -17,9 +22,12 @@
 }
 
 .navbar {
+  margin: 0 auto;
     max-width: 100vw;
     padding: 0 1rem;
+    background: linear-gradient(45deg, #408cff, blueviolet);
 }
+
 
 .vanta-container {
   width: 100%;
