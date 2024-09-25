@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit {
       this.setActive();
     });
     
-    (window as any).NavbarComponent = this;
+    // (window as any).NavbarComponent = this;
   }
 
   logout() {

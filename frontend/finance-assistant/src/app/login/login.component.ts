@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit{
 
   login(credentials: any): Observable<any> {
 
-    return this.http.post('http://localhost:8080/api/auth/login', credentials);
+    return this.http.post('http://localhost:8100/api/auth/login', credentials);
   }
 
   intercept(request: HttpRequest<any>,
