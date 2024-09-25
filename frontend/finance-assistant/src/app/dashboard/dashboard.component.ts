@@ -40,22 +40,24 @@ export class DashboardComponent implements OnInit {
     this.user = this.userService.getUserDetails();
 
     // Fetch transactions using accountNumber
-    if (this.user?.accountNumber) {
-      this.userService.getTransactions(this.user.accountNumber).subscribe(
-        (response: any) => {
-          this.transactions = response;
-          console.log('Transactions:', this.transactions);
-        },
-        (error) => {
-          console.log('Error fetching transactions:', error);
-        }
-      );
+    if (this.user) {
+      this.loadTransactions();
+    } else {
+      // Handle case where user details are not available
+      console.log('User details not found');
     }
 
     const navbarComponentRef = this.componentFactoryResolver.resolveComponentFactory(NavbarComponent)
     const navbarComponentInstance = navbarComponentRef.create(this.injector);
 
     navbarComponentInstance.instance.ngOnInit();
+  }
+
+  loadTransactions(): void {
+    this.userService.getTransactions(this.user.accountNumber).subscribe(transactions => {
+      this.user.transactions = transactions;
+      this.userService.setUserDetails(this.user);  // Update local storage with transactions
+    });
   }
 
 }

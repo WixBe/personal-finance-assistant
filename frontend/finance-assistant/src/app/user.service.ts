@@ -25,14 +25,24 @@ export class UserService {
     });
   }
 
-  // Method to set user details
+  // Method to set user details in local storage
   setUserDetails(details: any) {
-    this.userDetails = details;
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('userDetails', JSON.stringify(details));
+    } else {
+      console.log('localStorage is not available');
+    }
   }
 
-  // Method to get user details
+  // Method to get user details from local storage
   getUserDetails() {
-    return this.userDetails;
+    if (typeof localStorage !== 'undefined') {
+      const userDetails = localStorage.getItem('userDetails');
+      return userDetails ? JSON.parse(userDetails) : null;
+    } else {
+      console.log('localStorage is not available');
+      return null;
+    }
   }
 
   // Method to fetch transactions for a given account number
