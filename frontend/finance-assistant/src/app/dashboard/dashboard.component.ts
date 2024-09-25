@@ -1,37 +1,56 @@
 // dashboard.component.ts
-import { NgClass, NgFor } from '@angular/common';
+import { CommonModule, NgClass, NgFor } from '@angular/common';
 import { Component, ComponentFactoryResolver, Injector, OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  imports:[NgClass, NgFor]
+  imports:[NgClass, NgFor, CommonModule]
 })
 
 export class DashboardComponent implements OnInit {
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver, private injector: Injector) {}
+  user: any;
+  transactions: any[] = [];
+
+  constructor(private componentFactoryResolver: ComponentFactoryResolver, private injector: Injector, private userService: UserService) {}
 
   // Mock Data
-  user = {
-    name: 'John Doe',
-    totalBudget: 50000,
-    savings: 15000,
-    goals: [
-      { name: 'Vacation Fund', target: 10000, current: 5000 },
-      { name: 'Emergency Fund', target: 20000, current: 12000 }
-    ],
-    transactions: [
-      { id: 1, description: 'Grocery Shopping', amount: -2000, date: '2023-09-10' },
-      { id: 2, description: 'Salary Credit', amount: 30000, date: '2023-09-05' },
-      { id: 3, description: 'Electricity Bill', amount: -1500, date: '2023-09-01' }
-    ]
-  };
+  // user = {
+  //   name: 'John Doe',
+  //   totalBudget: 50000,
+  //   savings: 15000,
+  //   goals: [
+  //     { name: 'Vacation Fund', target: 10000, current: 5000 },
+  //     { name: 'Emergency Fund', target: 20000, current: 12000 }
+  //   ],
+  //   transactions: [
+  //     { id: 1, description: 'Grocery Shopping', amount: -2000, date: '2023-09-10' },
+  //     { id: 2, description: 'Salary Credit', amount: 30000, date: '2023-09-05' },
+  //     { id: 3, description: 'Electricity Bill', amount: -1500, date: '2023-09-01' }
+  //   ]
+  // };
 
   ngOnInit(): void {
+
+    this.user = this.userService.getUserDetails();
+
+    // Fetch transactions using accountNumber
+    if (this.user?.accountNumber) {
+      this.userService.getTransactions(this.user.accountNumber).subscribe(
+        (response: any) => {
+          this.transactions = response;
+          console.log('Transactions:', this.transactions);
+        },
+        (error) => {
+          console.log('Error fetching transactions:', error);
+        }
+      );
+    }
 
     const navbarComponentRef = this.componentFactoryResolver.resolveComponentFactory(NavbarComponent)
     const navbarComponentInstance = navbarComponentRef.create(this.injector);

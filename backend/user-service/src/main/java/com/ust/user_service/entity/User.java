@@ -43,9 +43,11 @@ public class User implements UserDetails {
     @UpdateTimestamp
     private Timestamp updatedAt;
 
-    @ElementCollection
-    @CollectionTable(name = "user_account_numbers", joinColumns = @JoinColumn(name = "user_id"))
-    private List<String> accountNumbers;
+//    @ElementCollection
+//    @CollectionTable(name = "user_account_numbers", joinColumns = @JoinColumn(name = "user_id"))
+//    private List<String> accountNumbers;
+
+    private String accountNumber;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -57,13 +59,14 @@ public class User implements UserDetails {
         return email;
     }
 
-    public User(String email, String password, String firstName, String lastName, String phone, Role role, List<String> accountNumbers) {
+    public User(String email, String password, String firstName, String lastName, String phone, Role role, String accountNumber) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
         this.role = role;
-        this.accountNumbers = accountNumbers;
+//        this.accountNumbers = accountNumbers;
+        this.accountNumber = accountNumber;
     }
 }

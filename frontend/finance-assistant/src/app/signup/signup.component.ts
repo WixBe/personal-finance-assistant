@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { NgClass, NgIf } from '@angular/common';
-import { UserService } from './user-service';
+
 import { HttpClientModule } from '@angular/common/http';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-signup',
@@ -29,6 +30,7 @@ export class SignupComponent {
     lastName: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     phone: new FormControl('', [Validators.required]),
+    accountNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]{12}')]),  // Validate account number with 12 digits only
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
     confirmPassword: new FormControl('', [Validators.required])
   }, { validators: this.passwordsMatchValidator }
@@ -46,6 +48,7 @@ export class SignupComponent {
       lastName: this.f.lastName.value,
       email: this.f.email.value,
       phone: this.f.phone.value,
+      accountNumber: this.f.accountNumber.value,
       password: this.f.password.value
     };
 

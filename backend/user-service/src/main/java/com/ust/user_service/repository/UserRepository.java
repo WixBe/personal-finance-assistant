@@ -13,8 +13,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByRoleAndEmail(Role role, String email);
 
-    @Query(
-            "SELECT u FROM User u JOIN u.accountNumbers a WHERE a = :accountNumber"
-    )
+//    @Query(
+//            "SELECT u FROM User u JOIN u.accountNumbers a WHERE a = :accountNumber"
+//    )
     Optional<User> findByAccountNumber(String accountNumber);
 }

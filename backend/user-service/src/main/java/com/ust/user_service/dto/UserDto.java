@@ -21,7 +21,8 @@ public record UserDto(
         Role role,
         Timestamp createdAt,
         Timestamp updatedAt,
-        List<String> accountNumbers
+//        List<String> accountNumbers
+        String accountNumber
 ) {
 
     public UserDto toDto(User user) {
@@ -36,7 +37,8 @@ public record UserDto(
                 user.getRole(),
                 user.getCreatedAt(),
                 user.getUpdatedAt(),
-                user.getAccountNumbers()
+//                user.getAccountNumbers()
+                user.getAccountNumber()
         );
     }
 
@@ -48,7 +50,8 @@ public record UserDto(
                 dto.lastName,
                 dto.phone,
                 dto.role,
-                dto.accountNumbers
+//                dto.accountNumbers
+                dto.accountNumber
         );
     }
 }

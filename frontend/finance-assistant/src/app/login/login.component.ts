@@ -1,10 +1,11 @@
 import { NgClass, NgIf } from '@angular/common';
-import { HttpClient, HttpClientModule, HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpEvent, HttpHandler, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { AuthService } from '../auth.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit{
   submitted = false;
   invalidLogin = false;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private authService: AuthService) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private authService: AuthService, private userService: UserService) { }
   
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -46,14 +47,25 @@ export class LoginComponent implements OnInit{
 
     this.login(loginDto).subscribe(
       (response: any) => {
-        localStorage.setItem('token', response.token)
+        localStorage.setItem('token', response.token);
         console.log('Login Successful', response);
-        setTimeout(() => {
-          this.authService.loggedIn.next(true);
-          this.router.navigate(['dashboard']).then(() => {
-            window.history.replaceState({}, '', '/dashboard');
-          });
-        }, 1000)
+
+        // Fetch user details after successful login
+        this.getUserDetails(loginDto.email).subscribe(
+          (userResponse: any) => {
+            // Set the user details in the UserService
+            this.userService.setUserDetails(userResponse);
+            console.log('User Details: ', userResponse);
+            
+            setTimeout(() => {
+              this.authService.loggedIn.next(true);
+              this.router.navigate(['dashboard']);
+            }, 1000);
+          },
+          (error) => {
+            console.log('Error fetching user details', error);
+          }
+        );
       },
       (error) => {
         console.log('Login failed', error);
@@ -65,6 +77,17 @@ export class LoginComponent implements OnInit{
   login(credentials: any): Observable<any> {
 
     return this.http.post('http://localhost:8100/api/auth/login', credentials);
+  }
+
+  getUserDetails(email: string): Observable<any> {
+
+    const token = localStorage.getItem('token');  // Get token from localStorage
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`  // Include the token in the Authorization header
+    });
+
+    return this.http.get(`http://localhost:8100/api/users/email?EMAIL=${email}`, { headers });
   }
 
   intercept(request: HttpRequest<any>,
