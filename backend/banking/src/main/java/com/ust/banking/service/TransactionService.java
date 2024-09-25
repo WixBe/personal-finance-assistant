@@ -21,11 +21,11 @@ public class TransactionService {
     private AccountRepository accountRepository;
 
     public List<Transaction> getTransactions(String accountNo) {
-        return transactionRepository.findByAccountNo(accountNo);
+        return transactionRepository.findAllByAccountNo(accountNo);
     }
 
     public Transaction addTransaction(Transaction transaction) {
-        if (transaction.getTransactionType() == TransactionType.WITHDRAW) {
+        if (transaction.getTransactionType() == TransactionType.Withdraw) {
             Account account = accountRepository.findByAccountNumber(transaction.getAccountNo());
             account.setAccountBalance(account.getAccountBalance() - transaction.getAmount());
             accountRepository.saveAndFlush(account);

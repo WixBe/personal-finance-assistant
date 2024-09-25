@@ -31,7 +31,7 @@ spring:
     platform: mysql
     url: jdbc:mysql://localhost:3306/finMaster
     username: root
-    password: root
+    password:
     driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
@@ -53,3 +53,6 @@ security:
   jwt:
     secret-key: 3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
     expiration-time: 86400000
+
+server:
+  port: 8100
