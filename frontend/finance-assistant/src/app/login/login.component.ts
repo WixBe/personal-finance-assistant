@@ -50,7 +50,9 @@ export class LoginComponent implements OnInit{
         console.log('Login Successful', response);
         setTimeout(() => {
           this.authService.loggedIn.next(true);
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['dashboard']).then(() => {
+            window.history.replaceState({}, '', '/dashboard');
+          });
         }, 1000)
       },
       (error) => {

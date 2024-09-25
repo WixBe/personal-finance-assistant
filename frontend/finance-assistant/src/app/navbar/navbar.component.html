@@ -10,29 +10,29 @@
           <ul class="navbar-nav ms-auto">
             @if (!isLoggedIn) {
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" (click)="setActive($event)" routerLink="home">Home</a>
+                <a class="nav-link" routerLink="home" routerLinkActive="active">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" (click)="setActive($event)" routerLink="features">Features</a>
+                <a class="nav-link" routerLink="features" routerLinkActive="active">Features</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" (click)="setActive($event)" routerLink="pricing">Pricing</a>
+                <a class="nav-link" routerLink="pricing" routerLinkActive="active">Pricing</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" (click)="setActive($event)" routerLink="login">Login</a>
-              </li>
+                <a class="nav-link" routerLink="login" routerLinkActive="active">Login</a>
+              </li>              
             } @else {
               <li class="nav-item">
-                <a class="nav-link active" (click)="setActive($event)" aria-current="page" routerLink="dashboard">Dashboard</a>
+                <a class="nav-link active" routerLinkActive="active" aria-current="page" routerLink="dashboard">Dashboard</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" (click)="setActive($event)" routerLink="dashboard">Dashboard</a>
+                <a class="nav-link" routerLinkActive="active" routerLink="dashboard">Dashboard</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" (click)="setActive($event)" routerLink="dashboard">Dashboard</a>
+                <a class="nav-link" routerLinkActive="active" routerLink="dashboard">Dashboard</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" (click)="setActive($event)" routerLink="home" (click)="logout()">Sign Out</a>
+                <a class="nav-link" routerLinkActive="active"  routerLink="home" (click)="logout()">Sign Out</a>
               </li>
             }
           </ul>

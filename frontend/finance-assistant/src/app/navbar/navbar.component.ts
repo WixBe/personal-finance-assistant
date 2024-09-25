@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { AuthService } from '../auth.service';
 
@@ -8,34 +8,46 @@ import { AuthService } from '../auth.service';
   standalone: true,
   imports: [RouterLink, NgIf],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit{
+export class NavbarComponent implements OnInit {
 
   isLoggedIn: boolean = false;
 
-  constructor( private authService: AuthService ) {}
+  constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.authService.isLoggedIn();
     this.authService.authStatus.subscribe(status => {
-      this.isLoggedIn = status
+      this.isLoggedIn = status;
     });
-    // (window as any).navbarComponent = this;
+
+    // Listen to route changes to set the active class
+    this.router.events.subscribe(() => {
+      this.setActive();
+    });
+    
+    (window as any).NavbarComponent = this;
   }
 
   logout() {
     this.authService.logout();
   }
 
-  setActive(event: Event) {
+  setActive() {
+    // Get the current route
+    const currentRoute = this.router.url;
+
     // Remove 'active' class from all nav-links
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => link.classList.remove('active'));
 
-    // Add 'active' class to the clicked nav-link
-    const target = event.target as HTMLElement;
-    target.classList.add('active');
+    // Add 'active' class to the nav-link that matches the current route
+    navLinks.forEach(link => {
+      const href = link.getAttribute('routerLink');
+      if (href && currentRoute.includes(href)) {
+        link.classList.add('active');
+      }
+    });
   }
-
 }
