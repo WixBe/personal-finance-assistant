@@ -1,0 +1,149 @@
+<div class="container mt-4">
+
+  <div class="card mb-4">
+    <div class="card-header">
+      <h2>Create Goal</h2>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()" #goalForm="ngForm">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" class="form-control" [(ngModel)]="goal.name" name="name" required>
+          <div *ngIf="goalForm.controls['name']?.invalid && (goalForm.controls['name']?.touched || goalForm.submitted)" class="text-danger">
+            <div *ngIf="goalForm.controls['name']?.errors?.['required']">Name is required.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="value">Value</label>
+          <input type="number" id="value" class="form-control" [(ngModel)]="goal.value" name="value" required min="0">
+          <div *ngIf="goalForm.controls['value']?.invalid && (goalForm.controls['value']?.touched || goalForm.submitted)" class="text-danger">
+            <div *ngIf="goalForm.controls['value']?.errors?.['required']">Value is required.</div>
+            <div *ngIf="goalForm.controls['value']?.errors?.['min']">Value must be a positive number.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" class="form-control" [(ngModel)]="goal.description" name="description"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="priority">Priority</label>
+          <select id="priority" class="form-control" [(ngModel)]="goal.priority" name="priority" required>
+            <option *ngFor="let priority of priorities" [value]="priority">{{ priority }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="durationInMonths">Duration in Months</label>
+          <input type="number" id="durationInMonths" class="form-control" [(ngModel)]="goal.durationInMonths" name="durationInMonths" required min="0">
+          <div *ngIf="goalForm.controls['durationInMonths']?.invalid && (goalForm.controls['durationInMonths']?.touched || goalForm.submitted)" class="text-danger">
+            <div *ngIf="goalForm.controls['durationInMonths']?.errors?.['required']">Duration is required.</div>
+            <div *ngIf="goalForm.controls['durationInMonths']?.errors?.['min']">Duration must be a positive number.</div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="goalForm.invalid">Create Goal</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2>Goals List</h2>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4 mb-4" *ngFor="let goal of goals">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ goal.name }}</h5>
+              <p class="card-text"><strong>Value:</strong> {{ goal.value }}</p>
+              <p class="card-text"><strong>Description:</strong> {{ goal.description }}</p>
+              <p class="card-text"><strong>Priority:</strong> {{ goal.priority }}</p>
+              <p class="card-text"><strong>Duration:</strong> {{ goal.durationInMonths }} months</p>
+              
+              <button (click)="confirmDelete(goal.id)" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container mt-4">
+  
+  <div class="card mb-4">
+    <div class="card-header">
+      <h2>Create Goal</h2>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()" #goalForm="ngForm">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" class="form-control" [(ngModel)]="goal.name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="value">Value</label>
+          <input type="number" id="value" class="form-control" [(ngModel)]="goal.value" name="value" required>
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" class="form-control" [(ngModel)]="goal.description" name="description"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="priority">Priority</label>
+          <select id="priority" class="form-control" [(ngModel)]="goal.priority" name="priority" required>
+            <option *ngFor="let priority of priorities" [value]="priority">{{priority}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="durationInMonths">Duration in Months</label>
+          <input type="number" id="durationInMonths" class="form-control" [(ngModel)]="goal.durationInMonths" name="durationInMonths">
+        </div>
+        <button type="submit" class="btn btn-primary">Create Goal</button>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header">
+      <h2>Goals List</h2>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4 mb-4" *ngFor="let goal of goals">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ goal.name }}</h5>
+              <p class="card-text"><strong>Value:</strong> {{ goal.value }}</p>
+              <p class="card-text"><strong>Description:</strong> {{ goal.description }}</p>
+              <p class="card-text"><strong>Priority:</strong> {{ goal.priority }}</p>
+              <p class="card-text"><strong>Duration:</strong> {{ goal.durationInMonths }} months</p>
+              
+              <button (click)="confirmDelete(goal.id)" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ -->

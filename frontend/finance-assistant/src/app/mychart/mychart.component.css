@@ -1,0 +1,58 @@
+:host {
+    width: 100%;
+    margin-top: 2rem;
+}
+
+
+/* Reset margin and padding for body */
+body {
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    height: 100vh; /* Full viewport height */
+    display: flex; /* Flexbox to center items */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    background-color: #eaeaea; /* Light background for contrast */
+}
+
+/* Flexbox container for the charts */
+.chart-container {
+    display: flex;              /* Enable Flexbox for horizontal alignment */
+    justify-content: space-between; /* Space between the two charts */
+    align-items: center;         /* Vertically align the charts */
+    width: 100%;                 /* Use full available width */
+    height: 80%;                 /* Use 80% of the viewport height */
+    max-width: 1200px;           /* Set a maximum width for the container */
+    margin: 0;                   /* No margin */
+    gap: 20px;                   /* Add space between the charts */
+}
+
+/* Styling for pie chart (takes 30% of the width) */
+#piechart {
+    flex: 0 0 30%;               /* Take up 30% of the width */
+    background-color: #f9f9f9;   /* Optional background for visual clarity */
+    border-radius: 10px;         /* Optional: rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: shadow for depth */
+}
+
+/* Styling for line chart (takes 70% of the width) */
+#linechart {
+    flex: 1 0 70%;               /* Take up 70% of the width */
+    background-color: #f9f9f9;   /* Optional background for visual clarity */
+    border-radius: 10px;         /* Optional: rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: shadow for depth */
+}
+
+/* Optional: Responsive layout */
+@media (max-width: 768px) {
+    .chart-container {
+        flex-direction: column;    /* Stack the charts vertically on smaller screens */
+        gap: 20px;                 /* Keep a gap between them */
+        height: 100vh;              /* Allow auto height for vertical stacking */
+    }
+
+    #piechart, #linechart {
+        width: 100%;               /* Ensure both charts take full width on mobile */
+        max-width: 100%;
+    }
+}

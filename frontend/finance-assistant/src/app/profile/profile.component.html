@@ -1,0 +1,32 @@
+<div class="profile-container">
+    <div class="profile-card">
+      <h2>User Profile</h2>
+  
+      <div class="profile-info">
+        <img src="../../../public/profile.png" alt="User Avatar" class="profile-avatar">
+        
+        <div class="profile-details">
+          <h3>{{ user?.firstName }} {{ user?.lastName }}</h3>
+          <p><strong>Email:</strong> {{ user?.email }}</p>
+          <p><strong>Phone:</strong> {{ user?.phone }}</p>
+          <p><strong>Account Number:</strong> {{ user?.accountNumber }}</p>
+        </div>
+      </div>
+  
+      <div class="account-stats">
+        <div class="stat">
+          <h4>Total Budget</h4>
+          <p>₹{{ user?.totalBudget }}</p>
+        </div>
+        <div class="stat">
+          <h4>Savings</h4>
+          <p>₹{{ user?.savings }}</p>
+        </div>
+      </div>
+
+      <div class="transactions-btn">
+          <a routerLink="" class="btn btn-primary">View All Transactions</a>
+      </div>
+    </div>
+  </div>
+  

@@ -1,8 +1,7 @@
-import { Component, OnInit, Renderer2, ElementRef } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd, RouterLink } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { RouterLink, Router, ActivatedRoute, Route } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { AuthService } from '../auth.service';
-import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -15,26 +14,20 @@ export class NavbarComponent implements OnInit {
 
   isLoggedIn: boolean = false;
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private renderer: Renderer2,  // Use Renderer2 for DOM manipulation
-    private el: ElementRef  // Use ElementRef to access the DOM tree inside the component
-  ) {}
+  constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.authService.isLoggedIn();
+    // this.authService.isLoggedIn();
     this.authService.authStatus.subscribe(status => {
       this.isLoggedIn = status;
     });
 
     // Listen to route changes to set the active class
-    this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(() => {
-        this.setActive();
-      });
+    this.router.events.subscribe(() => {
+      this.setActive();
+    });
+    
+    // (window as any).NavbarComponent = this;
   }
 
   logout() {
@@ -45,17 +38,15 @@ export class NavbarComponent implements OnInit {
     // Get the current route
     const currentRoute = this.router.url;
 
-    // Use ElementRef to access nav-links inside the component's template
-    const navLinks = this.el.nativeElement.querySelectorAll('.nav-link');
-    
-    // Loop through nav-links and remove 'active' class
-    navLinks.forEach((link: HTMLElement) => {
-      this.renderer.removeClass(link, 'active');
-      
-      // Check if the routerLink matches the current route
+    // Remove 'active' class from all nav-links
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => link.classList.remove('active'));
+
+    // Add 'active' class to the nav-link that matches the current route
+    navLinks.forEach(link => {
       const href = link.getAttribute('routerLink');
       if (href && currentRoute.includes(href)) {
-        this.renderer.addClass(link, 'active');
+        link.classList.add('active');
       }
     });
   }
