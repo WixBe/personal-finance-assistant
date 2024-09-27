@@ -1,6 +1,7 @@
 :host {
     width: 100%;
     margin-top: 2rem;
+    display: flex;
 }
 
 
@@ -21,12 +22,13 @@ body {
     display: flex;              /* Enable Flexbox for horizontal alignment */
     justify-content: space-between; /* Space between the two charts */
     align-items: center;         /* Vertically align the charts */
-    flex-direction: column;
+    /* flex-direction: column; */
     width: 100%;                 /* Use full available width */
     height: 80%;                 /* Use 80% of the viewport height */
     max-width: 1200px;           /* Set a maximum width for the container */
     margin: 0;                   /* No margin */
-    gap: 20px;                   /* Add space between the charts */
+    gap: 20px;  
+    margin-left: 5rem;                 /* Add space between the charts */
 }
 
 /* Styling for pie chart (takes 30% of the width) */

@@ -9,7 +9,7 @@
       <p>Total Savings: ₹{{ accountBalance }}</p>
     </div>
 
-    <div *ngIf="safety" class="msg">
+    <div *ngIf="!safety" class="msg">
       <h1 class="alert alert-danger">WARNING! YOU ARE OVER BUDGET</h1>
     </div>
   
@@ -36,7 +36,7 @@
         </thead>
         <tbody [@slideInOut]>
         <!-- Conditionally slice based on expanded state -->
-        <tr *ngFor="let transaction of (user?.transactions | slice: (expanded ? 0 : -5))">
+        <tr *ngFor="let transaction of transactions | slice:(expanded ? 0 : -5)">
           <td>{{ transaction.transactionDate | date: 'dd-MM-yyyy' }}</td>
           <td>{{ transaction.transactionDetails }}</td>
           <td [ngClass]="{

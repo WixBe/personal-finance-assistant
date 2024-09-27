@@ -1,17 +1,17 @@
 // dashboard.component.ts
 import { CommonModule, NgClass, NgFor } from '@angular/common';
 import { Component, ComponentFactoryResolver, Injector, OnInit } from '@angular/core';
-import { Transaction } from '../models/transactiions';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { GoalService } from '../services/goal.service';
 import { UserService } from '../services/user.service';
+import { Transaction } from '../models/transactions';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  imports:[NgClass, NgFor, CommonModule,]
+  imports:[NgClass, NgFor, CommonModule]
 })
 
 export class DashboardComponent implements OnInit {
@@ -41,24 +41,15 @@ export class DashboardComponent implements OnInit {
       console.error('User details not found or account number missing');
     }
 
-    this.loadGoals();
-
-    this.safety = this.accountBalance > this.totalBudget;
-
-    // Fetch transactions using accountNumber
-    if (this.user) {
-      this.loadTransactions();
-    } else {
-      // Handle case where user details are not available
-      console.log('User details not found');
-    }
-
-    
-
-    const navbarComponentRef = this.componentFactoryResolver.resolveComponentFactory(NavbarComponent)
+    // Initialize the navbar
+    const navbarComponentRef = this.componentFactoryResolver.resolveComponentFactory(NavbarComponent);
     const navbarComponentInstance = navbarComponentRef.create(this.injector);
-
     navbarComponentInstance.instance.ngOnInit();
+  }
+
+  // Method to check safety based on account balance and total budget
+  checkSafety(): void {
+    this.safety = this.accountBalance > this.totalBudget;
   }
 
   // Method to fetch the account balance
@@ -75,11 +66,18 @@ export class DashboardComponent implements OnInit {
   }
 
   loadTransactions(): void {
-    this.userService.getTransactions(this.user.accountNumber).subscribe(transactions => {
-      this.user.transactions = transactions;
-      this.userService.setUserDetails(this.user);  // Update local storage with transactions
-    });
+    this.userService.getTransactions(this.user.accountNumber).subscribe(
+      (transactions) => {
+        console.log('Transactions from API:', transactions); // Check the API response here
+        this.transactions = transactions; // Assign API response to the transactions array
+        this.userService.setUserDetails(this.user);  // Update local storage with transactions
+      },
+      (error) => {
+        console.error('Error fetching transactions:', error);
+      }
+    );
   }
+  
 
   // Method to load goals and calculate total budget
   loadGoals(): void {
@@ -91,6 +89,7 @@ export class DashboardComponent implements OnInit {
         // Calculate the total budget by summing goal values (e.g., targetAmount)
         this.totalBudget = this.goals.reduce((sum, goal) => sum + (goal.value || 0), 0);
         console.log('Total Budget:', this.totalBudget);
+        this.checkSafety();  // Check safety after the total budget is updated
       },
       (error) => {
         console.error('Error fetching goals:', error);

@@ -24,9 +24,9 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authService.isLoggedIn();
+   // Subscribe to authStatus BehaviorSubject to reflect actual login state
     this.authService.authStatus.subscribe(status => {
-      this.isLoggedIn = status;
+      this.isLoggedIn = status; // Set isLoggedIn based on the emitted value
     });
 
     // Listen to route changes to set the active class
