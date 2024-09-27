@@ -3,6 +3,7 @@ import { Component, NgModule, OnInit } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { GoalDto } from '../models/goal.dto';
 import { GoalService } from '../services/goal.service';
+import { UserService } from '../services/user.service';
 
 
 
@@ -15,9 +16,12 @@ import { GoalService } from '../services/goal.service';
 })
 export class GoalComponent implements OnInit {
 
+  user: any;
+
 
   goal: GoalDto = {
     name: '',
+    accountNumber: '',
     value: 0,
     description: '',
     priority: 'HIGH',
@@ -27,9 +31,10 @@ export class GoalComponent implements OnInit {
   priorities: string[] = ['HIGH', 'MEDIUM', 'LOW'];
   goalIdToDelete: number | null = null;
 
-  constructor(private goalService: GoalService) { }
+  constructor(private goalService: GoalService, private userService: UserService) { }
 
   ngOnInit(): void {
+    this.user = this.userService.getUserDetails();
     this.loadGoals();
   }
 
@@ -39,6 +44,7 @@ export class GoalComponent implements OnInit {
       return;
     }
 
+
     this.goalService.createGoal(this.goal).subscribe(() => {
       this.loadGoals();
       this.resetForm();
@@ -47,7 +53,7 @@ export class GoalComponent implements OnInit {
 
   loadGoals(): void {
     this.goalService.getAllGoals().subscribe(goals => {
-      this.goals = goals;
+      this.goals = goals.filter(goal => goal.accountNumber === this.user.accountNumber);
     });
   }
 
@@ -67,6 +73,7 @@ export class GoalComponent implements OnInit {
   resetForm(): void {
     this.goal = {
       name: '',
+      accountNumber: '',
       value: 0,
       description: '',
       priority: 'HIGH',

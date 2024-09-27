@@ -42,4 +42,9 @@ public class TransactionService {
         }
         return transactionRepository.save(transaction);
     }
+
+    public Account getAccountDetails(String accountNumber) {
+
+         return  accountRepository.findByAccountNumber(accountNumber);
+    }
 }

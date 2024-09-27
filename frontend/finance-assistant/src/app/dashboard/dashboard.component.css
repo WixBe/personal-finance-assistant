@@ -51,3 +51,16 @@
     border-radius: 5px;
   }
   
+  .transactions-btn {
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.alert-danger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}

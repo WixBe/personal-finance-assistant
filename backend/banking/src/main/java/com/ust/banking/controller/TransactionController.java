@@ -1,5 +1,6 @@
 package com.ust.banking.controller;
 
+import com.ust.banking.model.Account;
 import com.ust.banking.model.Transaction;
 import com.ust.banking.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,11 @@ public class TransactionController {
     @PostMapping
     public Transaction addTransaction(@RequestBody Transaction transaction) {
         return transactionService.addTransaction(transaction);
+    }
+
+    @GetMapping("balance/{accountNo}")
+    public Account getAccountDetails(@PathVariable String accountNo) {
+
+         return transactionService.getAccountDetails(accountNo);
     }
 }

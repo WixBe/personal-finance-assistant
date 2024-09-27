@@ -5,16 +5,20 @@
     <div class="budget-section">
       <h2>Your Budget Overview</h2>
       <p>Your Account Number: {{ user?.accountNumber }}</p>
-      <p>Total Budget: ₹{{ user?.totalBudget }}</p>
-      <p>Total Savings: ₹{{ user?.savings }}</p>
+      <p>Total Budget: ₹{{ totalBudget }}</p>
+      <p>Total Savings: ₹{{ accountBalance }}</p>
+    </div>
+
+    <div *ngIf="safety" class="msg">
+      <h1 class="alert alert-danger">WARNING! YOU ARE OVER BUDGET</h1>
     </div>
   
     <!-- Financial Goals Section -->
     <div class="goals-section">
       <h2>Your Financial Goals</h2>
       <ul>
-        <li *ngFor="let goal of user?.goals">
-          <strong>{{ goal.name }}</strong> - Target: ₹{{ goal.target }}, Current: ₹{{ goal.current }}
+        <li *ngFor="let goal of goals">
+          <strong>{{ goal.name }}</strong> <br> Target: ₹{{ goal.value }} <br> Duration: {{ goal.durationInMonths }} Months
         </li>
       </ul>
     </div>
@@ -30,19 +34,24 @@
             <th>Amount</th>
           </tr>
         </thead>
-        <tbody>
-          <tr *ngFor="let transaction of user?.transactions">
-            <td>{{ transaction.transactionDate | date: 'dd-MM-yyyy' }}</td>
-            <td>{{ transaction.transactionDetails }}</td>
-            <td [ngClass]="{
-              'negative': transaction.transactionType === 'Withdraw',
-              'positive': transaction.transactionType === 'Deposit'
-            }">
-              ₹{{ transaction.amount }}
-            </td>
-          </tr>
-        </tbody>
+        <tbody [@slideInOut]>
+        <!-- Conditionally slice based on expanded state -->
+        <tr *ngFor="let transaction of (user?.transactions | slice: (expanded ? 0 : -5))">
+          <td>{{ transaction.transactionDate | date: 'dd-MM-yyyy' }}</td>
+          <td>{{ transaction.transactionDetails }}</td>
+          <td [ngClass]="{
+            'negative': transaction.transactionType === 'Withdraw',
+            'positive': transaction.transactionType === 'Deposit'
+          }">
+            ₹{{ transaction.amount }}
+          </td>
+        </tr>
+      </tbody>
       </table>
+      <div class="transactions-btn">
+        <a class="btn btn-primary" (click)="toggleTransactions()">
+          {{ expanded ? 'Collapse' : 'Expand' }}
+        </a>      </div>
     </div>
   </div>
   

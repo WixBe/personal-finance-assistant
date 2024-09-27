@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root' // This makes the service available globally in the app
 })
 export class UserService {
-  
+
   private userDetails: any;
 
   constructor(private http: HttpClient) { }
@@ -49,5 +49,9 @@ export class UserService {
   // Method to fetch transactions for a given account number
   getTransactions(accountNo: string): Observable<any> {
     return this.http.get(`http://localhost:8200/api/transactions/${accountNo}`);
+  }
+
+  getAccount(accountNo: string): Observable<any> {
+    return this.http.get(`http://localhost:8200/api/transactions/balance/${accountNo}`)
   }
 }
