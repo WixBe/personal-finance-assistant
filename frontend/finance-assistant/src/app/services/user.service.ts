@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root' // This makes the service available globally in the app
 })
 export class UserService {
+  
   private userDetails: any;
 
   constructor(private http: HttpClient) { }

@@ -9,6 +9,7 @@ body {
     margin: 0; /* Remove default margin */
     padding: 0; /* Remove default padding */
     height: 100vh; /* Full viewport height */
+    /* width: 100%; */
     display: flex; /* Flexbox to center items */
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
@@ -20,6 +21,7 @@ body {
     display: flex;              /* Enable Flexbox for horizontal alignment */
     justify-content: space-between; /* Space between the two charts */
     align-items: center;         /* Vertically align the charts */
+    flex-direction: column;
     width: 100%;                 /* Use full available width */
     height: 80%;                 /* Use 80% of the viewport height */
     max-width: 1200px;           /* Set a maximum width for the container */

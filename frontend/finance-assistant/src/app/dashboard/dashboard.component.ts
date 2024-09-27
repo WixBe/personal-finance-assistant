@@ -2,7 +2,7 @@
 import { CommonModule, NgClass, NgFor } from '@angular/common';
 import { Component, ComponentFactoryResolver, Injector, OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { UserService } from '../user.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-dashboard',

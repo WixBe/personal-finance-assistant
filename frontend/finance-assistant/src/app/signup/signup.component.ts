@@ -4,7 +4,7 @@ import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validatio
 import { NgClass, NgIf } from '@angular/common';
 
 import { HttpClientModule } from '@angular/common/http';
-import { UserService } from '../user.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-signup',
